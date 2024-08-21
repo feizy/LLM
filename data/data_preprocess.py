@@ -119,7 +119,7 @@ def get_parser() -> ArgumentParser:
         default=Path(__file__).parent / "tokenizers" / "allenai_eleuther-ai-gpt-neox-20b-pii-special.json",
     )
     parser.add_argument("-s", "--seq-len", type=int, help="""Max sequence length.""", default=2048)
-    parser.add_argument("--eos", type=int, help="""EOS token ID.""", default=50279)
+    parser.add_argument("--eos", type=int, help="""EOS token ID.""", default=0)
     parser.add_argument("--pad", type=int, help="""PAD token ID.""", default=1)
     parser.add_argument("-j", "--num-proc", type=int, help="""Number of workers.""", default=8)
     return parser
