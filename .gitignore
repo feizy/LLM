@@ -7,9 +7,10 @@ build/
 dist/
 pip-wheel-metadata/
 
-
-# dev tools
 *.json.gz
+*.gz
+# dev tools
+venv/
 .envrc
 .python-version
 .idea
