@@ -51,7 +51,7 @@ def tokenize_with_progress(dataset, tokenizer, max_seq_len):
             pbar.update(len(batch['text']))
             return tokenize_function(batch, tokenizer, max_seq_len)
 
-        return dataset.map(update_progress, batched=True, remove_columns=['text'], num_proc=4)
+        return dataset.map(update_progress, batched=True, remove_columns=['text'], num_proc=1)
 
 
 # 执行tokenization并分块保存
