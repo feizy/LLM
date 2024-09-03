@@ -16,10 +16,22 @@ def process_file(file_path):
         data = np.fromfile(f, dtype=np.uint32)
     
     # 使用原始tokenizer解码
-    decoded_text = original_tokenizer.decode(data)
+    try:
+        decoded_text = original_tokenizer.decode(data, skip_special_tokens=True)
+        print(f"解码后的文本长度: {len(decoded_text)}")
+        print(f"解码后的文本片段: {decoded_text[:100]}...")
+    except Exception as e:
+        print(f"解码错误: {e}")
+        return data, None, None
     
     # 使用目标tokenizer重新编码
-    re_encoded = target_tokenizer.encode(decoded_text)
+    try:
+        re_encoded = target_tokenizer.encode(decoded_text, add_special_tokens=False)
+        if len(re_encoded) == 0:
+            print("警告：重新编码后的列表为空")
+    except Exception as e:
+        print(f"编码错误: {e}")
+        return data, decoded_text, None
     
     return data, decoded_text, re_encoded
 
@@ -31,6 +43,9 @@ for root, dirs, files in os.walk(data_path):
             file_path = os.path.join(root, filename)
             original_data, decoded_text, re_encoded = process_file(file_path)
             
+            if decoded_text is None or re_encoded is None:
+                print(f"跳过文件 {file_path} 由于处理错误")
+                continue
             # 创建对应的输出目录
             relative_path = os.path.relpath(root, data_path)
             output_dir = os.path.join(output_path, relative_path)
