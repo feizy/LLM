@@ -3,7 +3,7 @@ from transformers import AutoTokenizer
 import os
 
 # 加载原始tokenizer
-original_tokenizer = AutoTokenizer.from_pretrained("allenai/OLMo-7B-0724-hf")
+original_tokenizer = AutoTokenizer.from_pretrained("EleutherAI/gpt-neox-20b")
 
 # 加载目标tokenizer
 target_tokenizer = AutoTokenizer.from_pretrained("Qwen/CodeQwen1.5-7B-Chat")
